@@ -1,14 +1,15 @@
 
 
-import { ReqMessage, DecodedMessage } from '../types';
+import { Request } from '../types';
 
-export default function decodeMessage(reqMessage: ReqMessage){
-    // const values: string[] = reqMessage.header.fields.map((f: any) => f.value[0][0].value[0]);
+import decodeFactory from '../utils/segments';
 
-    // const decoded = {
-    //     fieldSeparator: reqMessage.header.delimiter
-    // } as DecodedMessage;
-
-    console.log(reqMessage)
-
+export default function decodeMessage(req: Request){
+    try {
+        const decoder = decodeFactory(req.msg.header.name);
+        const decodedMessage = decoder(req);
+        return decodedMessage;
+    } catch (err){
+        throw err;
+    }
 }
