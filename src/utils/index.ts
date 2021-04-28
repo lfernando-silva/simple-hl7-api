@@ -1,1 +1,1 @@
-export { default as messageDecoder } from "./message-decoder";
+export { default as decodeMessage } from "./decode-message";
