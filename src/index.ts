@@ -1,11 +1,11 @@
 const hl7 = require('simple-hl7');
 
+const { messageDecoder } = require('./utils');
+
 const app = hl7.tcp();
 
 app.use((req: any, res: any, next: any) => {
-    //req.msg is the HL7 message
-    console.log('******message received*****')
-    console.log(req.msg.log());
+    messageDecoder(req.msg)
     return next();
 })
 
@@ -31,3 +31,4 @@ app.use((err: Error, req: any, res: any, next: any) => {
 
 //Listen on port 7777
 app.start(7777);
+console.log('Server running at port 7777');
